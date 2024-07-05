@@ -1,5 +1,13 @@
+use std::{env, fs, io::Write};
+
 fn main() {
-    for (i, arg) in std::env::args().enumerate() {
-        std::fs::write(r#"\\.\CON"#, format!("{i}: [{arg}]\n")).expect("can write to console");
+    let mut console = fs::OpenOptions::new()
+        .write(true)
+        .open(r#"\\.\CON"#)
+        .expect("can open console device");
+
+    for (i, arg) in env::args().enumerate() {
+        let line = format!("{i}: [{arg}]\n");
+        console.write(line.as_bytes()).expect("can write to console");
     }
 }
