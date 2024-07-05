@@ -10,14 +10,16 @@
 //! This could be made portable to Unix-like systems by using `/dev/tty`
 //! instead of `\\.\CON` when the platform is not Windows.
 
-use std::{env, fs::File, io::Write};
+use std::{env, fs, io::Write};
 
 fn main() {
-    let mut console = File::create(r#"\\.\CON"#).expect("can open console device");
+    let mut console = fs::OpenOptions::new()
+        .write(true)
+        .open(r#"\\.\CON"#)
+        .expect("can open console device");
 
     for (i, arg) in env::args().enumerate() {
-        console
-            .write(format!("{i}: [{arg}]\n").as_bytes())
-            .expect("can write to console");
+        let line = format!("{i}: [{arg}]\n");
+        console.write(line.as_bytes()).expect("can write to console");
     }
 }
