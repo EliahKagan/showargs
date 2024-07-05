@@ -19,8 +19,6 @@ fn main() {
         .expect("can open console device");
 
     for (i, arg) in env::args().enumerate() {
-        console
-            .write(format!("{i}: [{arg}]\n").as_bytes())
-            .expect("can write to console");
+        write!(console, "{i}: [{arg}]\n").expect("can write to console");
     }
 }
