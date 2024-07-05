@@ -18,7 +18,7 @@ fn main() -> Result<(), Error> {
     let mut console = fs::OpenOptions::new().write(true).open(DEVICE_PATH)?;
 
     for (i, arg) in env::args().enumerate() {
-        write!(console, "{i}: [{arg}]\n")?;
+        writeln!(console, "{i}: [{arg}]")?;
     }
 
     Ok(())
