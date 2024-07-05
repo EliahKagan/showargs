@@ -5,7 +5,7 @@
 //!
 //! Note that this implementation only works properly on Windows, because it
 //! uses a device path for the console. This path, `\\.\CON`, like its legacy
-//! short form `CON` and alternatives using `CONOUT$`, are specific to Windows.
+//! short form `CON` and alternatives using `CONOUT$`, is specific to Windows.
 //!
 //! This could be made portable to Unix-like systems by using `/dev/tty`
 //! instead of `\\.\CON` when the platform is not Windows.
