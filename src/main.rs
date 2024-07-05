@@ -8,11 +8,11 @@ use std::{
     io::{Error, Write},
 };
 
-const DEVICE_PATH: &str = if cfg!(windows) {
-    r#"\\.\CON"#
-} else {
-    "/dev/tty"
-};
+#[cfg(windows)]
+const DEVICE_PATH: &str = r#"\\.\CON"#;
+
+#[cfg(not(windows))]
+const DEVICE_PATH: &str = "/dev/tty";
 
 fn main() -> Result<(), Error> {
     let mut console = fs::OpenOptions::new().write(true).open(DEVICE_PATH)?;
