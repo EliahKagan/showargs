@@ -9,7 +9,7 @@ use std::{
 };
 
 #[cfg(windows)]
-const DEVICE_PATH: &str = r#"\\.\CON"#;
+const DEVICE_PATH: &str = r"\\.\CON";
 
 #[cfg(not(windows))]
 const DEVICE_PATH: &str = "/dev/tty";
